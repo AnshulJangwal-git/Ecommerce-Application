@@ -4,6 +4,7 @@ package com.ecommerce.project.security.services;
 import com.ecommerce.project.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,10 +20,13 @@ import java.util.stream.Collectors;
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
+    @Getter
     private Long id;
 
+    @Getter
     private String username;
 
+    @Getter
     private String email;
 
     @JsonIgnore
@@ -57,13 +61,13 @@ public class UserDetailsImpl implements UserDetails {
         return authorities;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public String getEmail() {
+//        return email;
+//    }
 
     @Override
     public String getPassword() {
