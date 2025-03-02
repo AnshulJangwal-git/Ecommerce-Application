@@ -30,6 +30,9 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
+        // 1. Creating Object of authentication and
+        // authentication is done with the help of authenticationManager.
+        //If authentication is failed then we throw exception from the catch block..
         Authentication authentication;
         try {
             authentication = authenticationManager
@@ -42,7 +45,10 @@ public class AuthController {
             map.put("status", false);
             return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
         }
-
+        // 2. Otherwise we set the same authentication in the securityContext, retreive the userDetails,
+        // roles and username details with the help of our custom userDetailsImpl
+        // And then we generate token with the help of retreived username and finally pass this jwtToken and
+        // users details in the response.
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         String jwtToken = jwtUtils.generateTokenFromUsername(userDetails);
