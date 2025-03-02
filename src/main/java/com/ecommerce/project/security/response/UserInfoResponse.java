@@ -1,14 +1,17 @@
-package com.ecommerce.project.security.jwt;
+package com.ecommerce.project.security.response;
 
 import java.util.List;
 
-public class LoginResponse {
+public class UserInfoResponse {
+
+    private Long id;
+
     private String jwtToken;
 
     private String username;
     private List<String> roles;
 
-    public LoginResponse(String username, List<String> roles, String jwtToken) {
+    public UserInfoResponse(String username, List<String> roles, String jwtToken) {
         this.username = username;
         this.roles = roles;
         this.jwtToken = jwtToken;
