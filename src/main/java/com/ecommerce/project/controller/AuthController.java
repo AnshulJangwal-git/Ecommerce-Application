@@ -77,8 +77,8 @@ public class AuthController {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        UserInfoResponse response = new UserInfoResponse(userDetails.getId(),userDetails.getUsername(),
-                jwtToken, roles);
+        UserInfoResponse response = new UserInfoResponse(userDetails.getId(), userDetails.getUsername(),
+                roles, jwtToken);
         return ResponseEntity.ok(response);
     }
 
