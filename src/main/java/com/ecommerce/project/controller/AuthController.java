@@ -134,7 +134,7 @@ public class AuthController {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    @GetMapping("/user")
+    @GetMapping("/username")
     public String currentUserName(Authentication authentication){
         if(authentication != null){
             return authentication.getName();
