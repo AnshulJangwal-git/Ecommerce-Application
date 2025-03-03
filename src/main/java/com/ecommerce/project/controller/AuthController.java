@@ -80,7 +80,7 @@ public class AuthController {
                 .collect(Collectors.toList());
 
         UserInfoResponse response = new UserInfoResponse(userDetails.getId(), userDetails.getUsername(),
-                roles);
+                roles, jwtCookie.toString());
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE,
                 jwtCookie.toString())
                 .body(response);
