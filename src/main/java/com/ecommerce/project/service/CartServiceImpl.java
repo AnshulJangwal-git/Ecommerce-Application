@@ -35,11 +35,14 @@ public class CartServiceImpl implements CartService{
 
     @Override
     public CartDTO addProductToCart(Long productId, Integer quantity) {
+        //find the existing cart or create a new one
         Cart cart  = createCart();
 
+        //Retrieve product details
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
 
+        //Perform Validations
         CartItem cartItem = cartItemRepository.findCartItemByProductIdAndCartId(cart.getCartId(), productId);
 
         if (cartItem != null) {
@@ -55,6 +58,7 @@ public class CartServiceImpl implements CartService{
                     + " less than or equal to the quantity " + product.getQuantity() + ".");
         }
 
+        //Create Cart Item
         CartItem newCartItem = new CartItem();
 
         newCartItem.setProduct(product);
@@ -63,9 +67,10 @@ public class CartServiceImpl implements CartService{
         newCartItem.setDiscount(product.getDiscount());
         newCartItem.setProductPrice(product.getSpecialPrice());
 
+        //Save Cart Item
         cartItemRepository.save(newCartItem);
 
-        product.setQuantity(product.getQuantity());
+        product.setQuantity(product.getQuantity() - quantity);
 
         cart.setTotalPrice(cart.getTotalPrice() + (product.getSpecialPrice() * quantity));
 
@@ -82,7 +87,7 @@ public class CartServiceImpl implements CartService{
         });
 
         cartDTO.setProducts(productStream.toList());
-
+        //return the updated Cart
         return cartDTO;
     }
 
