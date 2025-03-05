@@ -23,6 +23,7 @@ public class CartServiceImpl implements CartService{
     @Autowired
     private CartRepository cartRepository;
 
+    @Autowired
     private AuthUtil authUtil;
 
     @Autowired
