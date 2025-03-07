@@ -138,6 +138,11 @@ public class CartServiceImpl implements CartService{
         return cartDTO;
     }
 
+    @Override
+    public CartDTO updateProductQuantityInCart(Long productId, int delete) {
+        return null;
+    }
+
     public Cart createCart(){
         Cart userCart =  cartRepository.findCartByEmail(authUtil.loggedInEmail());
         if(userCart != null){
