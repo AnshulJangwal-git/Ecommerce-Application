@@ -63,7 +63,7 @@ public class CartController {
                                                         @PathVariable Long productId){
        String status = cartService.deleteProductFromCart(cartId, productId);
        return new ResponseEntity<String>(status, HttpStatus.OK);
-       
+
 
     }
 
