@@ -42,7 +42,7 @@ public class Address {
     private String country;
 
     @NotBlank
-    @Size(min = 6, message = "Pincode must be atleast 6 characters")
+    @Size(min = 4, message = "Pincode must be atleast 4 characters")
     private String pincode;
 
     @ManyToOne
