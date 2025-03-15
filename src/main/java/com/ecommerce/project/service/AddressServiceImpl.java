@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AddressServiceImpl implements AddressService{
@@ -35,7 +36,12 @@ public class AddressServiceImpl implements AddressService{
 
     @Override
     public List<AddressDTO> getAddresses() {
-        return List.of();
+        List<Address> addresses = addressRepository.findAll();
+        List<AddressDTO> addressDTOS = addresses.stream()
+                .map(address -> modelMapper.map(address, AddressDTO.class))
+                .toList();
+
+        return addressDTOS;
     }
 }
 
