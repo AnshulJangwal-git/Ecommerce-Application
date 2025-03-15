@@ -88,6 +88,19 @@ public class AddressServiceImpl implements AddressService{
         return updatedAdressDTO;
     }
 
+    @Override
+    public String deleteAddress(Long addressId) {
+        Address addressFromDatabase = addressRepository.findById(addressId)
+                .orElseThrow(() -> new ResourceNotFoundException("Address", "AddressId", addressId));
+
+        User user = addressFromDatabase.getUser();
+        user.getAddresses().removeIf(address -> address.getAddressId().equals(addressId));
+        userRepository.save(user);
+
+        addressRepository.delete(addressFromDatabase);
+        return "Address deleted successfully with addressId: "+ addressId;
+    }
+
 
 }
 
